@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css.css" />
-        <title>Parte 3</title>
-    </head>
-    <body>
-        <h1 id="titulo">Titulo Parte 3</h1>
-        <div id="zona-tabla"></div>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.css">
+    <title>Prueba tecnica parte 3</title>
+</head>
+
+<body>
+    <h3 class="text-center my-5" id="titulo">Cursos</h3>
+    <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Nombre del curso</th>
+                    <th class="text-center "> Abreviacion del curso</th>
+                </tr>
+            </thead>
+            <tbody id="zonaTabla">
+            </tbody>
+        </table>
+    </div>
     <script src="js.js"></script>
+</body>
+
 </html>
