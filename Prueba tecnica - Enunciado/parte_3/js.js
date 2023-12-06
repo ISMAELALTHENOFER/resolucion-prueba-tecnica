@@ -13,26 +13,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function createTable(data, tablaId) {
     const tabla = document.getElementById(tablaId);
+    const cursos = {};
 
-    // Variable para rastrear el nombre del curso actual
-    let cursoActual = null;
+    // Agrupa los alumnos por curso
+    data.forEach(curso => {
+        const nombreCurso = curso['Nombre del curso'];
+        if (!cursos[nombreCurso]) {
+            cursos[nombreCurso] = {
+                alumnos: []
+            };
+        }
+        cursos[nombreCurso].alumnos.push({
+            dni: curso['Alumnos']['DNI del alumno'],
+            apellido: curso['Alumnos']['Apellido del alumno'],
+            nombre: curso['Alumnos']['Nombre del alumno']
+        });
+    });
 
     // Crea las filas y celdas de la tabla
-    data.forEach(curso => {
-        // Verifica si el nombre del curso ha cambiado (funcion para no repetir los cursos)
-        if (curso['Nombre del curso'] !== cursoActual) {
-            const nuevaFila = tabla.insertRow();
+    for (const nombreCurso in cursos) {
+        const curso = cursos[nombreCurso];
 
-            // Celda para el nombre del curso
-            const nombreCurso = nuevaFila.insertCell();
-            nombreCurso.innerHTML = `<strong> ${"Curso : " + curso['Nombre del curso']}</strong>`;
+        // Crea una fila para el curso
+        const nuevaFilaCurso = tabla.insertRow();
 
-            // Celda para la abreviacion del curso
-            const cursoAbreviado = nuevaFila.insertCell();
-            cursoAbreviado.innerHTML = curso['Abreviatura curso'];
+        // Celda para el nombre del curso
+        const nombreCursoCelda = nuevaFilaCurso.insertCell();
+        nombreCursoCelda.innerHTML = `<strong> Curso: ${nombreCurso}</strong>`;
 
-            // Actualiza la variable cursoActual
-            cursoActual = curso['Nombre del curso'];
-        }
-    });
+        // Crea una fila para los alumnos
+        const nuevaFilaAlumnos = tabla.insertRow();
+        const celdaAlumnos = nuevaFilaAlumnos.insertCell();
+
+        // Crear una lista para los alumnos
+        const ul = document.createElement('ul');
+        //crea la cabecera de la lista 
+        const cabeceraLi = document.createElement('li');
+        cabeceraLi.innerHTML = ' <strong> DNI </strong> | <strong> Apellido </strong> | <strong> Nombre </strong>';
+        ul.appendChild(cabeceraLi);
+
+        curso.alumnos.forEach(alumno => {
+            const li = document.createElement('li');
+            li.textContent = `${alumno.dni} ${alumno.apellido} ${alumno.nombre} `;
+            ul.appendChild(li);
+        });
+        celdaAlumnos.appendChild(ul);
+    }
 }
