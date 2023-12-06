@@ -51,6 +51,9 @@ function createTable(data, tablaId) {
         const cabeceraLi = document.createElement('li');
         cabeceraLi.innerHTML = ' <strong> DNI </strong> | <strong> Apellido </strong> | <strong> Nombre </strong>';
         ul.appendChild(cabeceraLi);
+        
+         // Ordenar alumnos alfabéticamente por apellido
+         curso.alumnos.sort((a, b) => a.apellido.localeCompare(b.apellido));
 
         curso.alumnos.forEach(alumno => {
             const li = document.createElement('li');
